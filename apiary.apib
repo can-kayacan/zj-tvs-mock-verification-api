@@ -1,0 +1,97 @@
+FORMAT: 1A
+HOST: http://polls.apiblueprint.org/
+
+# zenjob-tvs-mock-verification
+
+Verification API (REST) that will be consumed by the GraphQL Gateway.
+
+## Document Count [/documents/count]
+
+### GET THE NUMBER OF DOCUMENTS [GET]
+
++ Request (application/json)
+
+    + Headers
+
+            Authorization: "Berarer ..."
+
+
++ Response 200 (application/json)
+
+
+        {
+            "count": 114
+        }
+
+
+## Document Assignment [/documents/next]
+
+### GET or ASSIGN NEXT DOCUMENT [GET]
+
++ Request (application/json)
+
+    + Headers
+
+            Authorization: "Berarer ..."
+
+
++ Response 200 (application/json)
+
+
+        {
+            "id": "098F6BCD4621D373CADE4E832627B4F6",
+            "location": "http://www.orimi.com/pdf-test.pdf",
+            "type": "Imma",
+            "uploadedBy": "John Doe",
+            "uploadDate": "2018-03-19T12:00:00Z",
+            "metadata": [{
+                { name: "Matriculation Date", value: "01.10.2013" },
+                { name: "Current Term", value: "Summer 2015" },
+                { name: "Semester Period", value: "15.03.2015 - 30.09.2015"}
+            }]
+        }
+
+
+## Document Unassignment [/documents/{id}/unassign]
+
+### UNASSIGN DOCUMENT [PUT]
+
+
++ Request (application/json)
+
+    + Headers
+
+            Authorization: "Berarer ..."
+
+
++ Response 201 (application/json)
+
+
+    + Body
+
+        {
+        }
+
+
+## Document Review [/documents/{id}/review]
+
+### UPDATE STATUS [PUT]
+
++ Request (application/json)
+
+    + Headers
+
+            Authorization: "Berarer ..."
+            
+    + Body
+
+        {
+            "status": "Verified"
+        }
+
+
++ Response 200 (application/json)
+
+
+        {
+        }
