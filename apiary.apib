@@ -24,9 +24,9 @@ Verification API (REST) that will be consumed by the GraphQL Gateway.
         }
 
 
-## Document Assignment [/documents/next]
+## Document Assignment [/documents/assign]
 
-### GET or ASSIGN NEXT DOCUMENT [GET]
+### ASSIGN NEXT DOCUMENT [PUT]
 
 + Request (application/json)
 
@@ -70,12 +70,22 @@ Verification API (REST) that will be consumed by the GraphQL Gateway.
     + Body
 
         {
+            "id": "098F6BCD4621D373CADE4E832627B4F6",
+            "location": "http://www.orimi.com/pdf-test.pdf",
+            "type": "Imma",
+            "uploadedBy": "John Doe",
+            "uploadDate": "2018-03-19T12:00:00Z",
+            "metadata": [{
+                { name: "Matriculation Date", value: "01.10.2013" },
+                { name: "Current Term", value: "Summer 2015" },
+                { name: "Semester Period", value: "15.03.2015 - 30.09.2015"}
+            }]
         }
 
 
-## Document Review [/documents/{id}/review]
+## Document Verify [/documents/{id}/verify]
 
-### UPDATE STATUS [PUT]
+### VERIFY THE DOCUMENT [PUT]
 
 + Request (application/json)
 
@@ -86,7 +96,6 @@ Verification API (REST) that will be consumed by the GraphQL Gateway.
     + Body
 
         {
-            "status": "Verified"
         }
 
 
@@ -94,4 +103,73 @@ Verification API (REST) that will be consumed by the GraphQL Gateway.
 
 
         {
+            "id": "098F6BCD4621D373CADE4E832627B4F6",
+            "location": "http://www.orimi.com/pdf-test.pdf",
+            "type": "Imma",
+            "uploadedBy": "John Doe",
+            "uploadDate": "2018-03-19T12:00:00Z",
+            "metadata": [{
+                { name: "Matriculation Date", value: "01.10.2013" },
+                { name: "Current Term", value: "Summer 2015" },
+                { name: "Semester Period", value: "15.03.2015 - 30.09.2015"}
+            }]
         }
+        
+        
+        
+## Document Reject [/documents/{id}/reject]
+
+### REJECT THE DOCUMENT [PUT]
+
++ Request (application/json)
+
+    + Headers
+
+            Authorization: "Berarer ..."
+            
+    + Body
+
+        {
+            reasonCode: "OTHER",
+            reasonText: "Not valid ..."
+        }
+
+
++ Response 200 (application/json)
+
+
+        {
+            "id": "098F6BCD4621D373CADE4E832627B4F6",
+            "location": "http://www.orimi.com/pdf-test.pdf",
+            "type": "Imma",
+            "uploadedBy": "John Doe",
+            "uploadDate": "2018-03-19T12:00:00Z",
+            "metadata": [{
+                { name: "Matriculation Date", value: "01.10.2013" },
+                { name: "Current Term", value: "Summer 2015" },
+                { name: "Semester Period", value: "15.03.2015 - 30.09.2015"}
+            }]
+        }
+        
+        
+## Get Reject Reasons [/rejectReasons]
+
+### GET REJECT REASONS [GET]
+
++ Request (application/json)
+
+    + Headers
+
+            Authorization: "Berarer ..."
+            
+
+
++ Response 200 (application/json)
+
+
+        [
+            { code: "DOCUMENT_UNREADABLE" },
+            { code: "WRONG_DATA" },
+            { code: "WRONG_DOCUMENT" },
+            { code: "OTHER" }
+        ]
